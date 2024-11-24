@@ -43,6 +43,7 @@ function Login({setIsAuthenticated}: LoginProps) {
      localStorage.setItem('isAuthenticated', 'true')
       navigate('/')
       console.log(data)
+      console.log({ name, email, password })
     }
     catch(error){
       console.error(error)

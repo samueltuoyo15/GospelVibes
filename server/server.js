@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 import path, { dirname } from 'path'
 import dotenv from 'dotenv'
 import auth from './routes/auth.js'
+import updateprofilepicture from './routes/user.js'
 import axios from 'axios'
 import mongoose from 'mongoose'
 import songs from './routes/songs.js'
@@ -22,6 +23,7 @@ connectDb()
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 app.use('/api/auth', auth)
+app.use('/api/users', updateprofilepicture)
 app.use('/api/songs', songs);
 
 app.get('*', (req, res) => {

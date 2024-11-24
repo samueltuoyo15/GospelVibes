@@ -36,10 +36,9 @@ function Header({ user }: HeaderProps) {
       <h2 className="text-xl font-semibold">{period}</h2>
       {user ? (
         <div className="flex items-center gap-2">
-          <span className="inline">{user.username}</span>
+          <span className="inline">Welcome, {user.username || 'User'}</span>
           <img
             onClick={() => setShowSettings(!showSettings)}
-            onContextMenu={(e) => e.preventDefault()}
             src={user.profilePicture}
             className="rounded-full w-10 inline cursor-pointer"
             alt="User Profile"
@@ -49,9 +48,7 @@ function Header({ user }: HeaderProps) {
         <p>Please you are not logged in</p>
       )}
       {showSettings && (
-        <div className="absolute top-0 right-0 w-full h-full bg-black bg-opacity-50 z-50">
-          <Settings user={user} closeSettings={() => setShowSettings(false)} />
-        </div>
+        <Settings user={user} closeSettings={() => setShowSettings(false)} />
       )}
     </header>
   )

@@ -25,7 +25,7 @@ function Home() {
   return (
     <>
     <Header user={user}/>
-    <Music songs={songs}/>
+    <Music songs={songs} user={user}/>
     <Footer />
     </>
   )

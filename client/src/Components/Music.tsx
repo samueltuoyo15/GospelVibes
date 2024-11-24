@@ -1,12 +1,14 @@
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useState, useEffect } from 'react'
+import { User } from '../types/User'
 
 type MusicProps = {
   songs: any[]
+  user: User | null
 }
 
-function Music({ songs }: MusicProps) {
+function Music({ songs, user }: MusicProps) {
   const [loading, setLoading] = useState<boolean>(true)
   const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
@@ -52,22 +54,27 @@ function Music({ songs }: MusicProps) {
   }
 
   const toggleExpand = () => setExpanded(!expanded)
-
-  const showPrevious = () => {
-    if (selectedIndex && selectedIndex > 0) setSelectedIndex(selectedIndex - 1)
+    const showPrevious = () => {
+  if (selectedIndex && selectedIndex > 0) {
+    setSelectedIndex((prev) => prev! - 1);
   }
+};
 
-  const showNext = () => {
-    if (selectedIndex !== null && selectedIndex < songs.length - 1) setSelectedIndex(selectedIndex + 1)
+const showNext = () => {
+  if (selectedIndex !== null && selectedIndex < songs.length - 1) {
+    setSelectedIndex((prev) => prev! + 1);
   }
+};
+
+
 
   return (
     <>
       <section className="select-none text-white mt-5 p-4 overflow-x-scroll mb-20">
-        <h2 className="text-lg font-bold mb-2">Your Top Mixes</h2>
+        <h2 className="text-lg font-bold mb-2">Made for {user?.username || null}</h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8">
           {loading
-            ? Array(50).fill(0).map((_, index) => (
+            ? Array(songs.length || 50).fill(0).map((_, index) => (
                 <div key={index} className="space-y-2">
                   <Skeleton height={130} width="100%" baseColor="#e0e0e0" highlightColor="#f0f0f0" />
                   <Skeleton width="80%" />
@@ -129,15 +136,6 @@ function Music({ songs }: MusicProps) {
         </div>
    </div>
       )}
-      <script
-
-src="https://widget.galichat.com/gali-embeded.min.js"
-
-chat-hash="5w36dretqh3uj7f7khwubc"
-
-defer>
-
-</script>
     </>
   )
 }
