@@ -41,9 +41,9 @@ function Login({setIsAuthenticated}: LoginProps) {
     const data = await response.json()
      setIsAuthenticated(true)
      localStorage.setItem('isAuthenticated', 'true')
+     localStorage.setItem('user', JSON.stringify(data.user))
       navigate('/')
       console.log(data)
-      console.log({ name, email, password })
     }
     catch(error){
       console.error(error)

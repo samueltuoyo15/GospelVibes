@@ -39,7 +39,7 @@ function Header({ user }: HeaderProps) {
           <span className="inline">Welcome, {user.username || 'User'}</span>
           <img
             onClick={() => setShowSettings(!showSettings)}
-            src={user.profilePicture}
+            src={user.profilePicture || '/default-profile.png'}
             className="rounded-full w-10 inline cursor-pointer"
             alt="User Profile"
           />
