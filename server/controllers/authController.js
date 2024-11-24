@@ -1,0 +1,76 @@
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcryptjs'
+import dotenv from 'dotenv'
+import User from '../models/user.js'
+
+dotenv.config();
+
+export const registerUser = async (req, res) => {
+  try {
+    const { name, email, password } = req.body
+    
+    const existingUser = await User.findOne({ email })
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists', user: existingUser })
+    }
+    
+    const encryptedPassword = await bcrypt.hash(password, 10)
+    
+    const newUser = await User.create({
+      name,
+      email,
+      password: encryptedPassword,
+      profilePicture: '/user.png',
+    });
+    
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_SECRET_EXPIRES_IN,
+    });
+    
+    res.status(201).json({
+      message: 'User Registered Successfully',
+      success: true,
+      token,
+      user: {
+        id: newUser._id,
+        username: newUser.name,
+        profilePicture: newUser.profilePicture,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Error registering user', error })
+  }
+};
+
+export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body
+    
+    const user = await User.findOne({ email })
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' })
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password)
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid email or password' })
+    }
+    
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_SECRET_EXPIRES_IN,
+    })
+    
+    res.status(200).json({
+      message: 'User Logged In Successfully',
+      success: true,
+      token,
+      user: {
+        id: user._id,
+        username: user.name,
+        profilePicture: user.profilePicture,
+      },
+    })
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in', error })
+  }
+}
