@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import {User} from '../types/User'
+import { User } from '../types/User'
 import Settings from '../Components/Settings'
+
 type HeaderProps = {
   user: User | null
 }
 
 function Header({ user }: HeaderProps) {
   const [period, setPeriod] = useState<string>('')
+  const [showSettings, setShowSettings] = useState<boolean>(false)
 
   useEffect(() => {
     const updatePeriod = () => {
@@ -23,7 +25,6 @@ function Header({ user }: HeaderProps) {
         setPeriod('Good Night')
       }
     }
-    console.log(user)
     updatePeriod()
     const intervalId = setInterval(updatePeriod, 1000)
 
@@ -35,17 +36,22 @@ function Header({ user }: HeaderProps) {
       <h2 className="text-xl font-semibold">{period}</h2>
       {user ? (
         <div className="flex items-center gap-2">
-          <span className="inline">{user.name}</span>
+          <span className="inline">{user.username}</span>
           <img
-            onClick={}
+            onClick={() => setShowSettings(!showSettings)}
             onContextMenu={(e) => e.preventDefault()}
             src={user.profilePicture}
-            className="rounded-full w-10 inline"
+            className="rounded-full w-10 inline cursor-pointer"
             alt="User Profile"
           />
         </div>
       ) : (
         <p>Please you are not logged in</p>
+      )}
+      {showSettings && (
+        <div className="absolute top-0 right-0 w-full h-full bg-black bg-opacity-50 z-50">
+          <Settings user={user} closeSettings={() => setShowSettings(false)} />
+        </div>
       )}
     </header>
   )
