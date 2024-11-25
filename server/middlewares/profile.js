@@ -1,21 +1,10 @@
-import express from 'express'
-import multer from 'multer'
-import { updateProfilePicture } from '../controllers/authControllers.js'
-import { verifyToken } from '../middlewares/profile.js'
+import express from 'express';
+import { updateProfilePicture } from '../controllers/authController';
+import authenticate from '../middleware/authenticate';
 
-const router = express.Router()
+const router = express.Router();
 
+// Make sure the authenticate middleware is applied first
+router.put('/updateProfilePicture', authenticate, updateProfilePicture);
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './uploads') 
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)) 
-  },
-})
-const upload = multer({ storage })
-
-router.post('/update-profile-picture', verifyToken, upload.single('image'), updateProfilePicture)
-
-export default Router
+export default router;
