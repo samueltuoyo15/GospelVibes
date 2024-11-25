@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaDoorOpen, FaInfoCircle, FaSun, FaUserFriends} from 'react-icons/fa'
 import axios from 'axios'
 import { User } from '../types/User'
 
@@ -45,6 +45,12 @@ const Settings = ({ user, closeSettings }: SettingsProps) => {
   const handleFileInputClick = () => {
     document.getElementById('imageInput')?.click()
   }
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated')
+    localStorage.removeItem('user')
+    window.location.href = '/login'
+  }
 
   return user ? (
     <div className="fixed top-0 right-0 bg-black w-full h-full z-50 shadow-lg p-4 transition-transform transform translate-x-0">
@@ -73,7 +79,14 @@ const Settings = ({ user, closeSettings }: SettingsProps) => {
           onChange={handleImageUpload}
         />
         <p className="text-sm text-white">Click the image to change your profile picture</p>
-      </div>
+      </div>  
+      <ul className="text-white p-4 mt-10">
+         <li className="mb-5"><FaUserFriends className="mr-3 inline"/> Switch Account</li>
+         <li className="mb-5" onClick={handleLogout}>
+         <FaDoorOpen className="mr-3 inline"/> Logout</li>
+         <li className="mb-5"><FaSun className="mr-3 inline"/>Switch Theme</li>
+         <li className="mb-5"><FaInfoCircle className="mr-3 inline"/> Help & Feedback</li>
+        </ul>
     </div>
   ) : (
     <p className="text-white">Please you are not logged in</p>

@@ -36,7 +36,7 @@ function Header({ user }: HeaderProps) {
       <h2 className="text-xl font-semibold">{period}</h2>
       {user ? (
         <div className="flex items-center gap-2">
-          <span className="inline">Welcome, {user.username || 'User'}</span>
+          <span className="inline">{user.username || 'User'}</span>
           <img
             onClick={() => setShowSettings(!showSettings)}
             src={user.profilePicture || '/default-profile.png'}

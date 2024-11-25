@@ -1,11 +1,9 @@
-import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { useState, useEffect } from 'react'
 import Footer from '../Components/Footer'
 
 function Search(){
   const [search, setSearch] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(true)
   const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -18,8 +16,7 @@ function Search(){
 };
 
 const fetchGospelTracks = async () => {
-  setLoading(true)
-  const response = await fetch(`/find?search=${search}`, {
+  const response = await fetch(`api/songs/find?search=${search}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -31,8 +28,6 @@ const fetchGospelTracks = async () => {
   }
   console.log(data)
   setSongs(data)
-  const timeout = setTimeout(() => setLoading(false), 2000)
-  return () => clearTimeout(timeout)
 }
 
   useEffect(() => {
@@ -85,15 +80,7 @@ const fetchGospelTracks = async () => {
       <section className="select-none text-white mt-5 p-4 overflow-x-scroll mb-20">
         <h2 className="text-lg font-bold mb-2">results for {search}</h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8">
-          {loading
-            ? Array(1).fill(0).map((_, index) => (
-                <div key={index} className="space-y-2">
-                  <Skeleton height={130} width="100%" baseColor="#e0e0e0" highlightColor="#f0f0f0" />
-                  <Skeleton width="80%" />
-                  <Skeleton width="60%" />
-                </div>
-              ))
-            : songs.map((track, index) => (
+         {songs.map((track, index) => (
                 <div key={track.id} onContextMenu={(e) => e.preventDefault()} onClick={() => selectSong(index)} className="cursor-pointer">
                   <img src={track.album.images[0]?.url} className="block w-full rounded" />
                   <p className="text-gray-400 line-clamp-2 text-sm text-justify">{track.artists[0].name}</p>
