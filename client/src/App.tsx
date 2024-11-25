@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-do
 import {useState, useEffect} from 'react'
 import Home from './Pages/Home'
 import Search from './Pages/Search'
+import SignUp from './Pages/SignUp'
 import Login from './Pages/Login'
+import NotFoundPage from './Pages/NotFoundPage'
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => localStorage.getItem('isAuthenticated') === 'true')
   useEffect(() => {
@@ -23,9 +25,11 @@ function App() {
   return (
     <Router>
       <Routes>
-     <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />}/>
-     <Route path="/search" element={isAuthenticated ? <Search /> : <Navigate to="/login" />}/>
+     <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/signup" />}/>
+     <Route path="/search" element={isAuthenticated ? <Search /> : <Navigate to="/signup" />}/>
      <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+     <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated}/>} />
+     <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   )
