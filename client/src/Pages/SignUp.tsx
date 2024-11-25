@@ -122,7 +122,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
             </>
           )}
         </button>
-      <p className="text-2xl text-white mt-7">Dont have an account yet? <Link to="/login" className="text-blue-800">Login</Link></p>
+      <p className="text-2xl text-white mt-7">Already have an account? <Link to="/login" className="text-blue-800">Login</Link></p>
       </form>
    </section>
   )
