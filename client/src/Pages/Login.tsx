@@ -72,7 +72,7 @@ function Login({ setIsAuthenticated }: LoginProps) {
     <section className="flex flex-col items-center text-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4">
       <h1 className="text-5xl font-bold mb-6">Welcome Back</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email" className="text-left w-full">Email: </label>
+        <label htmlFor="email" className="block text-left w-full">Email: </label>
         <input
           id="email"
           type="email"
@@ -80,7 +80,7 @@ function Login({ setIsAuthenticated }: LoginProps) {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full block border-2 mt-3 mb-3 rounded py-3 px-10 text-black"
         />
-        <label htmlFor="password" className="text-left w-full">Password:</label>
+        <label htmlFor="password" className="block mt-3 text-left w-full">Password:</label>
         <input
           id="password"
           type="password"

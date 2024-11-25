@@ -77,7 +77,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
     <section className="flex flex-col items-center text-center justify-center min-h-screen bg-gradient-to-r from-purple-500 to-blue-500 text-white p-4">
       <h1 className="text-5xl font-bold mb-6">Welcome to Gospel Beats</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name" className="text-left w-full">Name:</label>
+        <label htmlFor="name" className="block text-left w-full">Name:</label>
         <input
          id="name"
           type="text"
@@ -85,7 +85,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
           onChange={(e) => setName(e.target.value)}
           className="w-full block border-2 rounded py-3 px-10 text-black"
         />
-        <label htmlFor="password" className="text-left w-full">Password:</label>
+        <label htmlFor="password" className="block mt-3 text-left w-full">Password:</label>
         <input
           id="password"
           type="password"
@@ -93,7 +93,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full block border-2 mt-3 rounded py-3 px-10 text-black"
         />
-        <label htmlFor="email" className="text-left">Email:</label>
+        <label htmlFor="email" className="text-left w-full block mt-3">Email:</label>
         <input
           id="email"
           type="email"
