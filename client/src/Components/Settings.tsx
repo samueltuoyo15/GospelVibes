@@ -1,15 +1,11 @@
 import { useState } from 'react'
-import { FaTimes, FaDoorOpen, FaInfoCircle, FaSun, FaUserFriends} from 'react-icons/fa'
+import { FaTimes, FaDoorOpen, FaInfoCircle, FaSun, FaUserFriends } from 'react-icons/fa'
 import axios from 'axios'
 import { User } from '../types/User'
 
 type SettingsProps = {
   user: User | null
   closeSettings: () => void
-}
-
-type ServerResponse = {
-  profilePicture: string
 }
 
 const Settings = ({ user, closeSettings }: SettingsProps) => {
@@ -27,13 +23,18 @@ const Settings = ({ user, closeSettings }: SettingsProps) => {
 
       const formData = new FormData()
       formData.append('image', file)
-
+      const token = localStorage.getItem('token')
+      if (!token) {
+      console.error('Token is missing')
+      }
       try {
         setIsUploading(true)
-        const response = await axios.post<ServerResponse>('/api/users/updateprofilepicture', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
+        await axios.post('api/users/updateprofilepicture', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          }
         })
-        setPreviewUrl(response.data.profilePicture)
       } catch (error) {
         console.error('Error uploading image:', error)
       } finally {
@@ -45,10 +46,11 @@ const Settings = ({ user, closeSettings }: SettingsProps) => {
   const handleFileInputClick = () => {
     document.getElementById('imageInput')?.click()
   }
-  
+
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated')
     localStorage.removeItem('user')
+    localStorage.removeItem('token')
     window.location.href = '/login'
   }
 
@@ -79,14 +81,21 @@ const Settings = ({ user, closeSettings }: SettingsProps) => {
           onChange={handleImageUpload}
         />
         <p className="text-sm text-white">Click the image to change your profile picture</p>
-      </div>  
+      </div>
       <ul className="text-white p-4 mt-10">
-         <li className="mb-5"><FaUserFriends className="mr-3 inline"/> Switch Account</li>
-         <li className="mb-5" onClick={handleLogout}>
-         <FaDoorOpen className="mr-3 inline"/> Logout</li>
-         <li className="mb-5"><FaSun className="mr-3 inline"/>Switch Theme</li>
-         <li className="mb-5"><FaInfoCircle className="mr-3 inline"/> Help & Feedback</li>
-        </ul>
+        <li className="mb-5">
+          <FaUserFriends className="mr-3 inline" /> Switch Account
+        </li>
+        <li className="mb-5" onClick={handleLogout}>
+          <FaDoorOpen className="mr-3 inline" /> Logout
+        </li>
+        <li className="mb-5">
+          <FaSun className="mr-3 inline" /> Switch Theme
+        </li>
+        <li className="mb-5">
+          <FaInfoCircle className="mr-3 inline" /> Help & Feedback
+        </li>
+      </ul>
     </div>
   ) : (
     <p className="text-white">Please you are not logged in</p>

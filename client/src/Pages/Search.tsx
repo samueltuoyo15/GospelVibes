@@ -4,6 +4,7 @@ import Footer from '../Components/Footer'
 
 function Search(){
   const [search, setSearch] = useState<string>('')
+  const [isEmpty, setIsEmpty] = useState<boolean>(false)
   const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -23,8 +24,8 @@ const fetchGospelTracks = async () => {
     },
   })
   const data = await response.json();
-  if(!data){
-    setSongs(['Hi'])
+  if(data.length === 0){
+    setIsEmpty(true)
   }
   console.log(data)
   setSongs(data)
@@ -88,6 +89,9 @@ const fetchGospelTracks = async () => {
                 </div>
               ))}
         </div>
+           {isEmpty && (
+            <img src="/no_data.svg" className="text-center w-82 mx-auto" />
+          )}
       </section>
 
       {selectedIndex !== null && (

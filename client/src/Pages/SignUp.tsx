@@ -64,6 +64,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
       setIsAuthenticated(true)
       localStorage.setItem('isAuthenticated', 'true')
       localStorage.setItem('user', JSON.stringify(data.user))
+      localStorage.setItem('token', data.token)
       navigate('/')
     } catch (error: any) {
       setErrorMessage(error.message)  
