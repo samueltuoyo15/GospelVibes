@@ -12,7 +12,7 @@ function Footer(){
         <FaSearch className="inline text-lg"/>
         <span className="block">Search</span>
       </NavLink>
-       <NavLink to="/" className="text-center">
+       <NavLink to="/libary" className="text-center">
         <FaDoorOpen className="inline text-lg"/>
         <span className="block">Your Libary</span>
       </NavLink>

@@ -16,7 +16,7 @@ function Premium() {
     payment_options: 'card,ussd,banktransfer',
     customer: {
       email: user.email,
-      phone_number: '08012345678',
+      phone_number: '',
       name: user.username,
     },
     customizations: {

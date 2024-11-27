@@ -10,7 +10,6 @@ function Home() {
   const fetchGospelTracks = async () => {
     const response = await fetch('api/songs/random-gospel-songs')
     const data = await response.json()
-    console.log(data)
     setSongs(data)
   }
 
