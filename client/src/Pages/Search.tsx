@@ -80,6 +80,7 @@ const fetchGospelTracks = async () => {
     </section>
       <section className="select-none text-white mt-5 p-4 overflow-x-scroll mb-20">
         <h2 className="text-lg font-bold mb-2">results for {search}</h2>
+        <h3 className={!search ? 'text-5xl text-center text-white' : 'hidden'}>You Haven't Made any Searches</h3>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8">
          {songs.map((track, index) => (
                 <div key={track.id} onContextMenu={(e) => e.preventDefault()} onClick={() => selectSong(index)} className="cursor-pointer">
