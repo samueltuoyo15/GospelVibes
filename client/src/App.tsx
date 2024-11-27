@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import Search from './Pages/Search'
 import SignUp from './Pages/SignUp'
 import Login from './Pages/Login'
+import Premium from './Pages/Premium'
 import NotFoundPage from './Pages/NotFoundPage'
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => localStorage.getItem('isAuthenticated') === 'true')
@@ -29,6 +30,7 @@ function App() {
      <Route path="/search" element={isAuthenticated ? <Search /> : <Navigate to="/signup" />}/>
      <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
      <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated}/>} />
+     <Route path="/premium" element={<Premium />} />
      <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

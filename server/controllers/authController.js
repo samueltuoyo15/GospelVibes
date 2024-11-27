@@ -9,7 +9,7 @@ dotenv.config();
 
 export const updateProfilePicture = async (req, res) => {
   try {
-    const { userId } = req.user; // Extract userId from the authenticated user
+    const { userId } = req.user; 
     const file = req.file;
 
     if (!file) {
