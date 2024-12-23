@@ -18,7 +18,6 @@ const client_secret = process.env.CLIENT_SECRET
 
 connectDb()
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')))
 app.use('/api/auth', auth)
 app.use('/api/users', updateprofilepicture)
 app.use('/api/songs', songs);
