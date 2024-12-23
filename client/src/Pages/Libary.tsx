@@ -72,7 +72,7 @@ function Library() {
     <>
     <div className="min-h-screen bg-gradient-to-r mb-30 from-purple-500 to-blue-500 text-white p-8">
       <h1 className="text-4xl font-bold mb-8">Your Library</h1>
-      <section className="mb-12">
+      <section className="mb-30">
         <h2 className="text-2xl font-semibold mb-4 flex items-center">
           <Clock className="mr-2" /> Recent Songs
         </h2>
@@ -113,7 +113,7 @@ function Library() {
         </div>
       </section>
 
-      <section>
+      <section className="mb-30">
         <h2 className="text-2xl font-semibold mb-4 flex items-center">
           <HardDrive className="mr-2" /> Device Storage Music
         </h2>
@@ -126,7 +126,7 @@ function Library() {
         {isLoading && <p className="text-center py-4">Loading device storage music...</p>}
         {error && <p className="text-center py-4 text-red-300">{error}</p>}
         {!isLoading && !error && deviceSongs.length > 0 && (
-          <div className="bg-white bg-opacity-10 rounded-lg p-4">
+          <div className="mb-50 bg-white bg-opacity-10 rounded-lg p-4">
             {deviceSongs.map((song) => (
               <div key={song.id} className="flex items-center justify-between py-2 border-b border-white border-opacity-20 last:border-b-0">
                 <div className="flex items-center">

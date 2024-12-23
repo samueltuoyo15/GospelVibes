@@ -14,30 +14,36 @@ function Music({ songs, user }: MusicProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<boolean>(false)
   const [playback, setPlayback] = useState<HTMLAudioElement | null>(null)
-
+  console.log(songs)
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 2000)
     return () => clearTimeout(timeout)
   }, [])
 
   useEffect(() => {
-    if (selectedIndex !== null) {
-      const audio = new Audio(songs[selectedIndex].preview_url)
-      setPlayback(audio)
-      audio.play()
-      setIsSongPlaying(true)
-
-      audio.onended = () => {
-        setIsSongPlaying(false)
-        setSelectedIndex(null)
-      }
-
-      return () => {
-        audio.pause()
-        audio.currentTime = 0
-      }
+  if (selectedIndex !== null) {
+    const song = songs[selectedIndex]
+    if (!song.preview_url) {
+      console.error('No preview URL for this song.')
+      return
     }
-  }, [selectedIndex, songs])
+
+    const audio = new Audio(song.preview_url)
+    setPlayback(audio)
+    audio.play().catch((err) => console.error('Audio playback failed:', err))
+    setIsSongPlaying(true)
+
+    audio.onended = () => {
+      setIsSongPlaying(false)
+      setSelectedIndex(null)
+    }
+
+    return () => {
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }
+}, [selectedIndex, songs])
 
   const selectSong = (index: number) => {
     if (selectedIndex === index) {

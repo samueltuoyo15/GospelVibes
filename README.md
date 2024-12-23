@@ -1,6 +1,6 @@
-# 🎶 Gospel Music Streaming Web App (PWA)
+# 🎶 Gospel Vibes (PWA)
 
-Welcome to the **Gospel Music Streaming Web App** – a cutting-edge Progressive Web App (PWA) designed to provide a seamless experience for gospel music lovers. This application offers a responsive, immersive, and accessible platform for streaming, downloading, and discovering gospel music.
+Welcome to the **Gospel Vibes** – a cutting-edge Progressive Web App (PWA) designed to provide a seamless experience for gospel music lovers. This application offers a responsive, immersive, and accessible platform for streaming, downloading, and discovering gospel music.
 
 ## ✨ Features
 
@@ -16,7 +16,7 @@ Welcome to the **Gospel Music Streaming Web App** – a cutting-edge Progressive
 
 | Frontend            | Backend           | Additional Services                |
 |---------------------|-------------------|------------------------------------|
-| React (TypeScript)  | Node.js (Express) |  render for deployment             |
+| React (TypeScript)  | Node.js (Express) |  vercel for deployment             |
 | Tailwind CSS        | MongoDB           |                                    |
 | PWA Standards       |                   |                                    |
 
