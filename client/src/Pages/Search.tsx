@@ -17,7 +17,7 @@ function Search(){
 };
 
 const fetchGospelTracks = async () => {
-  const response = await fetch(`api/songs/find?search=${search}`, {
+  const response = await fetch(`${import.meta.env.VITE_SEARCH_URL}${search}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

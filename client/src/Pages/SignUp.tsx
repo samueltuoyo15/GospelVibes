@@ -46,7 +46,7 @@ function SignUp({ setIsAuthenticated }: LoginProps) {
     setErrorMessage('')  
 
     try {
-      const response = await fetch('/api/auth/register', {
+      const response = await fetch(import.meta.env.VITE_SIGNUP_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

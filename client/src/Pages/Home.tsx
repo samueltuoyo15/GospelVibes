@@ -8,7 +8,7 @@ function Home() {
   const [songs, setSongs] = useState<any[]>([])
   const [user, setUser] = useState<User | null>(null)
   const fetchGospelTracks = async () => {
-    const response = await fetch('api/songs/random-gospel-songs')
+    const response = await fetch(import.meta.env.VITE_GET_RANDOM_SONGS)
     const data = await response.json()
     setSongs(data)
   }
