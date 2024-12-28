@@ -98,7 +98,7 @@ const showNext = () => {
 
   return (
     <>
-      <section className="select-none text-white mt-5 p-4 overflow-x-scroll mb-20">
+      <section className="select-none text-white mt-5 p-4 overflow-y-scroll mb-20">
         <h2 className="text-lg font-bold mb-2">Made for {user?.username || null}</h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8">
           {loading

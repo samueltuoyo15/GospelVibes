@@ -1,3 +1,4 @@
+import Main from '../main';
 import { useState, useEffect } from 'react'
 import Header from '../Components/Header'
 import Music from '../Components/Music'
@@ -23,8 +24,10 @@ function Home() {
 
   return (
     <>
+    <main className="md:ml-64">
     <Header user={user}/>
     <Music songs={songs} user={user}/>
+    </main>
     <Footer />
     </>
   )
