@@ -41,11 +41,11 @@ function App() {
      />
      
      <Route path="/libary" 
-     element={isAuthenticated ? <Libary/> : <Login/> } 
+     element={isAuthenticated ? <Libary/> : <Login setIsAuthenticated={setIsAuthenticated}/> } 
      />
      
      <Route path="/premium"
-     element={isAuthenticated ? <Premium /> : <Login/>}
+     element={isAuthenticated ? <Premium /> : <Login setIsAuthenticated={setIsAuthenticated}/>}
      />
      
      <Route path="*" 
