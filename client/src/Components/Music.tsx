@@ -9,17 +9,39 @@ type MusicProps = {
 }
 
 function Music({ songs, user }: MusicProps) {
+  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
   const [loading, setLoading] = useState<boolean>(true)
   const [isSongPlaying, setIsSongPlaying] = useState<boolean>(false)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [expanded, setExpanded] = useState<boolean>(false)
   const [playback, setPlayback] = useState<HTMLAudioElement | null>(null)
-  console.log(songs)
+  
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 2000)
     return () => clearTimeout(timeout)
   }, [])
-
+ 
+ useEffect(() => {
+   const handleOnline = () => setIsOnline(true)
+   const handleOffline = () => setIsOnline(false)
+   
+   window.addEventListener('online', handleOnline)
+   window.addEventListener('offline', handleOffline)
+   
+   return () => {
+   window.removeEventListener('offline', handleOffline)
+   window.removeEventListener('offline', handleOffline)
+   }
+ },[])
+ 
+ useEffect(() => {
+   if(isOnline && songs.length > 0){
+      setLoading(false)
+   }
+   else{
+   setLoading(true)
+   }
+ },[isOnline, songs])
   useEffect(() => {
   if (selectedIndex !== null) {
     const song = songs[selectedIndex]
