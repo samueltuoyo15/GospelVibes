@@ -8,9 +8,8 @@ router.get('/random-gospel-songs', async (req, res) => {
   try {
     const token = await getAccessToken()
     const response = await axios.get(
-      'https://api.spotify.com/v1/search?q=genre:gospel&type=track&limit=50',
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+      'https://api.spotify.com/v1/search?q=genre:gospel+year:2019-2024&type=track',
+      { headers: { Authorization: `Bearer ${token}` }});
     const songs = response.data.tracks.items
     res.json(songs)
   } catch (error) {

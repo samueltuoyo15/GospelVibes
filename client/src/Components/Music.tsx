@@ -23,7 +23,7 @@ function Music({ songs, user }: MusicProps) {
   useEffect(() => {
   if (selectedIndex !== null) {
     const song = songs[selectedIndex]
-    if (!song.preview_url) {
+    if (song.preview_url === null) {
       console.error('No preview URL for this song.')
       return
     }
