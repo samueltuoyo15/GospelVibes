@@ -1,4 +1,3 @@
-import Main from '../main';
 import { useState, useEffect } from 'react'
 import Header from '../Components/Header'
 import Music from '../Components/Music'
