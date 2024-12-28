@@ -13,17 +13,7 @@ function App() {
     const Status = localStorage.getItem('isAuthenticated')
     setIsAuthenticated(Status === 'true')
   },[])
-  useEffect(() => {
-  const handleOffline = () => {
-    alert('Device is offline');
-  };
 
-  window.addEventListener('offline', handleOffline);
-
-  return () => {
-    window.removeEventListener('offline', handleOffline);
-  };
-}, []);
   return (
     <Router>
       <Routes>
