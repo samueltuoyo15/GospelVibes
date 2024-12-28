@@ -27,13 +27,30 @@ function App() {
   return (
     <Router>
       <Routes>
-     <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/signup" />}/>
-     <Route path="/search" element={isAuthenticated ? <Search /> : <Navigate to="/signup" />}/>
-     <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
-     <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated}/>} />
-     <Route path="/libary" element={isAuthenticated ? <Libary /> : <Navigate to="/signup" />} />
-     <Route path="/premium" element={isAuthenticated ? <Premium /> : <Navigate to="/signup" />} />
-     <Route path="*" element={<NotFoundPage />} />
+     <Route path="/" element={<Home />}/>
+     <Route path="/search"
+     element={<Search />}
+     />
+     
+     <Route path="/login"
+     element={<Login setIsAuthenticated={setIsAuthenticated}/>} 
+     />
+     
+     <Route path="/signup" 
+     element={<SignUp setIsAuthenticated={setIsAuthenticated}/>} 
+     />
+     
+     <Route path="/libary" 
+     element={isAuthenticated ? <Libary/> : <Login/> } 
+     />
+     
+     <Route path="/premium"
+     element={isAuthenticated ? <Premium /> : <Login/>}
+     />
+     
+     <Route path="*" 
+     element={<NotFoundPage />}
+     />
       </Routes>
     </Router>
   )
