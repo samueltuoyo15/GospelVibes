@@ -98,7 +98,7 @@ const showNext = () => {
 
   return (
     <>
-      <section className="select-none text-white mt-5 p-4 overflow-y-scroll mb-20">
+      <section className="relative select-none text-white mt-5 p-4 overflow-y-scroll mb-20">
         <h2 className="text-lg font-bold mb-2">Made for {user?.username || null}</h2>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-8">
           {loading
@@ -120,8 +120,8 @@ const showNext = () => {
       </section>
 
       {selectedIndex !== null && (
-     <div>
-    <div className={`${expanded ? 'h-40' : 'h-full bottom-0 overflow-hidden flex justify-center flex-col items-center'} fixed bottom-14 left-0 w-full bg-gray-900 text-white p-4 transition-height duration-300`}>
+     <div className="md:absolute bottom-5 md:mx-auto">
+    <div className={`${expanded ? 'h-40' : 'h-full bottom-0 overflow-hidden flex justify-center flex-col items-center'} fixed md:relative md:block bottom-14 left-0 w-full bg-gray-900 text-white p-4 transition-height duration-300`}>
     <div onClick={toggleExpand} className="flex items-center justify-between">
     <div className={`flex items-center flex-1 ${!expanded ? 'flex-col' : 'flex-row'}`}>
     <img onContextMenu={(e) => e.preventDefault()} src={songs[selectedIndex].album.images[0]?.url} className={`${!expanded ? 'block w-92 rounded mx-auto' : 'w-10 h-10 mr-3 rounded'}`} />
