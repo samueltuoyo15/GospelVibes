@@ -49,13 +49,13 @@ function Premium() {
 
   return (
     <div className="bg-gradient-to-r from-purple-500 to-blue-500 min-h-screen text-white">
-      <div className="container mx-auto px-4 py-16 mb-32">
+      <div className="md:ml-64 container mx-auto px-4 py-16 mb-32">
         <h2 className="text-4xl font-bold text-center mb-12">Choose Your Premium Plan</h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-5 w-full mx-auto">
           {/* Monthly Plan Card */}
           <div
             onClick={() => setSelectedPlan('monthly')}
-            className={`bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
+            className={`bg-white w-64 rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
               selectedPlan === 'monthly' ? 'scale-105 ring-4 ring-yellow-400' : 'hover:scale-105'
             }`}
           >
@@ -88,7 +88,7 @@ function Premium() {
           {/* Yearly Plan Card */}
           <div
             onClick={() => setSelectedPlan('yearly')}
-            className={`bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
+            className={`w-64 bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
               selectedPlan === 'yearly' ? 'scale-105 ring-4 ring-yellow-400' : 'hover:scale-105'
             }`}
           >
