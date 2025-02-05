@@ -55,7 +55,7 @@ function Premium() {
           {/* Monthly Plan Card */}
           <div
             onClick={() => setSelectedPlan('monthly')}
-            className={`bg-white w-64 rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
+            className={`bg-white w-full max-w-md rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
               selectedPlan === 'monthly' ? 'scale-105 ring-4 ring-yellow-400' : 'hover:scale-105'
             }`}
           >
@@ -88,7 +88,7 @@ function Premium() {
           {/* Yearly Plan Card */}
           <div
             onClick={() => setSelectedPlan('yearly')}
-            className={`w-64 bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
+            className={`w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden transform transition duration-300 ${
               selectedPlan === 'yearly' ? 'scale-105 ring-4 ring-yellow-400' : 'hover:scale-105'
             }`}
           >
