@@ -19,5 +19,5 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY --from=client-builder /client/dist /app/client/dist
 COPY --from=server-builder /server /app/server
 WORKDIR /app/server
-EXPOSE 5000
-CMD ["node", "server.js"]
+EXPOSE 10000
+CMD ["ts-node", "server.ts"]
