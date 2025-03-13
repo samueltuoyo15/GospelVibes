@@ -8,6 +8,7 @@ import session from "express-session"
 import connectDB from "./db/mongoose"
 import dotenv from "dotenv"
 dotenv.config()
+connectDB()
 
 const app: Application = express()
 app.use(corsConfig())
@@ -23,7 +24,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
 app.listen(process.env.PORT, () => {
   console.log("app is running....")
-  connectDB()
 })

@@ -1,33 +1,32 @@
-import { useState, useEffect } from 'react'
-import Header from '../Components/Header'
-import Music from '../Components/Music'
-import Footer from '../Components/Footer'
-import {User} from '../types/User'
+import { useQuery } from "@tanstack/react-query"
+import Header from "../Components/Header"
+import Music from "../Components/Music"
+import Footer from "../Components/Footer"
+import { useAppStore } from "../store"
 
 function Home() {
-  const [songs, setSongs] = useState<any[]>([])
-  const [user, setUser] = useState<User | null>(null)
+  const setSongs = useAppStore.use.setSongs()
+  const songs = useAppStore.use.songs()
+  const user = useAppStore.use.user()
+
   const fetchGospelTracks = async () => {
     const response = await fetch(import.meta.env.VITE_GET_RANDOM_SONGS)
-    const data = await response.json()
-    setSongs(data)
+    return response.json()
   }
 
-  useEffect(() => {
-    const userData = localStorage.getItem('user')
-    if (userData) {
-      setUser(JSON.parse(userData) as User)
-    }
-    fetchGospelTracks()
-  }, [])
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["gospelTracks"],
+    queryFn: fetchGospelTracks,
+    onSuccess: (fetchedSongs) => setSongs(fetchedSongs)
+  })
 
   return (
     <>
-    <main className="md:ml-64">
-    <Header user={user}/>
-    <Music songs={songs} user={user}/>
-    </main>
-    <Footer />
+      <main className="md:ml-64">
+        <Header user={user} />
+        <Music songs={songs} user={user} isLoading={isLoading} error={error} />
+      </main>
+      <Footer />
     </>
   )
 }

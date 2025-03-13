@@ -18,10 +18,6 @@ function Footer(){
         <FaDoorOpen className="inline md:mr-3"/>
         <span className="block">Your Libary</span>
       </NavLink>
-       <NavLink to="/premium" className="md:mb-4 md:flex md:items-center md:justify-between text-center">
-        <FaSpotify className="inline md:mr-3"/>
-        <span className="block">Premium</span>
-      </NavLink>
     </aside>
     )
 }

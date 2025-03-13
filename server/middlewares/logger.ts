@@ -17,5 +17,6 @@ export const requestLogger = (req: Request, res: Response, next: NextFunction) =
 }
 
 export const addTimestamp = (req: Request, res: Response, next: NextFunction) => {
-  req.timestamp = new Date().toISOString()
+  req.timestamp = req.timestamp || new Date().toISOString()
+  next()
 }

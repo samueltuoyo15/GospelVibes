@@ -4,7 +4,6 @@ import Home from './Pages/Home'
 import Search from './Pages/Search'
 import SignUp from './Pages/SignUp'
 import Login from './Pages/Login'
-import Premium from './Pages/Premium'
 import Libary from './Pages/Libary'
 import NotFoundPage from './Pages/NotFoundPage'
 function App() {
@@ -33,10 +32,7 @@ function App() {
      <Route path="/libary" 
      element={isAuthenticated ? <Libary/> : <Login setIsAuthenticated={setIsAuthenticated}/> } 
      />
-     
-     <Route path="/premium"
-     element={isAuthenticated ? <Premium /> : <Login setIsAuthenticated={setIsAuthenticated}/>}
-     />
+    
      
      <Route path="*" 
      element={<NotFoundPage />}
