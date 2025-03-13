@@ -1,6 +1,8 @@
 import express, { Application } from "express"
 import helmet from "helmet"
 import { corsConfig } from "./config/corsConfig"
+import { requestLogger, addTimestamp } from "./middlewares/logger"
+import songsRoute from "./routes/songsRoute"
 import cookieParser from "cookie-parser"
 import session from "express-session"
 import connectDB from "./db/mongoose"
@@ -9,17 +11,19 @@ dotenv.config()
 
 const app: Application = express()
 app.use(corsConfig())
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
-server.use(helmet())
-server.use(cookieParser())
-server.use(session({
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(helmet())
+app.use(requestLogger)
+app.use(addTimestamp)
+app.use(songsRoute)
+app.use(cookieParser())
+app.use(session({
   secret: process.env.SESSION_SECRET!,
   resave: false,
   saveUninitialized: true,
 }))
-
 app.listen(process.env.PORT, () => {
-  console.log("Server is running....")
+  console.log("app is running....")
   connectDB()
 })

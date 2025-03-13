@@ -17,7 +17,7 @@ export const corsConfig = () => {
     credentials: true,
     preflightContinue: false,
     maxAge: 600,
-    optionSuccessStatus: 204
+  //  optionSuccessStatus: 204 as any
   })
 }
 
