@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { exec } from "child_process"
 
 interface SongDetailsInterface {
+  id: string 
   title: string
   audioUrl: string
   thumbnailUrl: string
@@ -18,7 +19,7 @@ export const fetchSongs = async (req: Request, res: Response) => {
     ]
 
     const pickRandomTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)]
-    const command = `yt-dlp "ytsearch30:${pickRandomTerm}" -j --no-playlist --extract-audio --audio-format mp3`
+    const command = `yt-dlp "ytsearch1:${pickRandomTerm}" -j --no-playlist --extract-audio --audio-format mp3`
 
     exec(command, (error, stdout, stderr) => {
       if (error) {
@@ -26,15 +27,16 @@ export const fetchSongs = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Failed to fetch songs" })
       }
 
-      const data = stdout.trim().split("\n").map(line => JSON.parse(line))
-
-      const songs: SongDetailsInterface[] = data.map(song => ({
-        title: song.title,
-        audioUrl: song.url,
-        thumbnailUrl: song.thumbnail,
-        duration: song.duration_string,
-        uploader: song.uploader
-      }))
+      const data = JSON.parse(stdout)
+      console.log(data)
+      const songs: SongDetailsInterface = {
+        id: data.id,
+        title: data.title,
+        audioUrl: data.url,
+        thumbnailUrl: data.thumbnail || "",
+        duration: data.duration_string,
+        uploader: data.uploader
+      }
 
       res.status(200).json(songs)
     })

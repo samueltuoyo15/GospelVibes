@@ -3,7 +3,7 @@ import cors from "cors"
 export const corsConfig = () => {
   return cors({
     origin: (origin, callback) => {
-      const allowedOrigins = ["http://localhost:10000"]
+      const allowedOrigins = ["http://localhost:5173"]
       
       if(!origin || allowedOrigins.indexOf(origin) !== -1){
         callback(null, true)
@@ -16,8 +16,7 @@ export const corsConfig = () => {
     exposedHeaders: ["X-Total-Count", "Content-Range"],
     credentials: true,
     preflightContinue: false,
-    maxAge: 600,
-  //  optionSuccessStatus: 204 as any
+    maxAge: 600
   })
 }
 

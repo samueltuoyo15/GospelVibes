@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
 app.use(requestLogger)
 app.use(addTimestamp)
-app.use(songsRoute)
+app.use("/api", songsRoute)
 app.use(cookieParser())
 app.use(session({
   secret: process.env.SESSION_SECRET!,

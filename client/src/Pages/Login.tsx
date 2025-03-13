@@ -1,25 +1,11 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import styled, { keyframes } from 'styled-components'
 
 interface LoginProps {
   setIsAuthenticated: (isAuthenticated: boolean) => void
 }
 
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`
 
-const Loader = styled.span`
-  border: 4px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  border-top: 4px solid rgba(255, 255, 255, 1);
-  width: 24px;
-  height: 24px;
-  animation: ${spin} 1s linear infinite;
-  margin-right: 10px;
-`
 
 function Login({ setIsAuthenticated }: LoginProps) {
   const [loading, setLoading] = useState<boolean>(false)
@@ -100,7 +86,7 @@ function Login({ setIsAuthenticated }: LoginProps) {
         >
           {loading ? (
             <>
-              <Loader />
+              
               Checking User Info...
             </>
           ) : (
