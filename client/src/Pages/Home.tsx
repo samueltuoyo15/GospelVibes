@@ -32,7 +32,7 @@ function Home() {
     queryKey: ["gospelTracks"],
     queryFn: fetchGospelTracks,
     onSuccess: (fetchedSongs) => {
-      setSongs(fetchedSongs[0]) // Set the first song from the fetched data
+      setSongs(fetchedSongs[0])
     }
   })
 
